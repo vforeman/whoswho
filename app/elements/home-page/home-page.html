@@ -33,10 +33,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
+        'mousewheel': '_scrollHandler'
       },
       properties: {
         dataRoute: {type: String, notify: true},
         elementName: {type: String, value: 'home-page', notify: true}
+      },
+      _scrollHandler: function(e){
+        console.log('scrolling',e.detail);
       }
     });
   })();
