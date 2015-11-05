@@ -24,7 +24,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 100%;
       }
       .first{
-        font-weight: bolder;
+        font-weight: lighter;
+        font-family: 'lorem-ipsum';
+        font-size: 72px;
+        color: var(--ww-red);
+      }
+      .last{
+        font-size: 72px;
+        font-family: 'simple-print';
       }
       .hosted-by{
         font-weight: bolder;
@@ -36,10 +43,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <span class='flex'></span>
       <div class='layout vertical'>
         <span class='flex self-center'>logo</span>
-        <span class='flex self-center hosted-by'>hosted by</span>
+        <span class=' self-center hosted-by'>hosted by</span>
         <div class='layout horizontal flex self-center'>
-          <span class='first'>{{_formatFirst(host.first)}}</span>
-          <span class='last'>{{host.last}}</span>
+          <span class='first self-center'>{{_formatFirst(host.first)}}</span>
+          <span class='last self-center'>{{host.last}}</span>
         </div>
         <ww-timer class='flex self-center'>s</ww-timer>
         <whoswho-toolbar class='flex self-center' exclude='{{dataRoute}}'></whoswho-toolbar>
