@@ -13,6 +13,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/neon-animation/animations/slide-up-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/slide-from-right-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/slide-left-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-from-left-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-right-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
 
 <link rel="import" href="../home-page/home-page.html">
@@ -55,14 +57,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'select-previous-neon-page': '_prevPage'
       },
       properties: {
+        routes: {type: Array, value: ['home','whoswho','event','about']},
         route: {type: String, notify: true},
         elementName: {type: String, value: 'whoswho-app', notify: true}
       },
       _nextPage: function(e){
-        this.$.pages.selectNext();
+        var url = ('/'+this.routes[(this.routes.indexOf(this.route) + 1) % 4]).replace('home','');
+        page(url);
+        // this.$.pages.selectNext();
       },
       _prevPage: function(e){
-        this.$.pages.selectPrevious();
+        var url = ('/'+this.routes[(this.routes.indexOf(this.route) + 3) % 4]).replace('home','');
+        page(url);
+        // this.$.pages.selectPrevious();
       }
     });
   })();
