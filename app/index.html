@@ -60,11 +60,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body unresolved class="fullbleed layout vertical">
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
-
+    <iron-media-query query="(max-width: 480px)" query-matches="{{isMobile}}"></iron-media-query>
+    <iron-media-query query="(min-width: 481px)" query-matches="{{isDesktop}}"></iron-media-query>
 
         <!-- Main Content -->
         <div class="content">
-          <whoswho-app route='{{route}}'></whoswho-app>
+          <whoswho-app route='{{route}}' is-mobile='{{isMobile}}' is-desktop='{{isDesktop}}' exit-animation='{{exitAnimation}}' entry-animation='{{entryAnimation}}'></whoswho-app>
         </div>
 
 

@@ -21,7 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <whoswho-toolbar class='self-center' exclude='{{dataRoute}}'></whoswho-toolbar>
-    <div>Hello from <span>{{elementName}}</span></div>
+    <div class='flex'>Hello from <span>{{elementName}}</span></div>
   </template>
   <script>
   (function() {
@@ -34,16 +34,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ready: function(){
         this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,.9) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,.3) 100%),' + "url('"+this.bgImgUrl+"')";
         this.style.backgroundRepeat = 'no-repeat';
-        this.style.backgroundSize = 'cover';
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
           'mousewheel': '_scrollHandler'
       },
       properties: {
+        mediaQuery: {type: Object, notify: true, observer: '_mediaQueryChanged'},
         bgImgUrl: {type: String, value:'../../images/ww1.jpg', notify: true},
         dataRoute: {type: String, notify: true},
         elementName: {type: String, value: 'event-page', notify: true}
+      },
+      _mediaQueryChanged: function(mediaQuery){
+        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : 'center';
       },
       _scrollHandler: function(e){
         console.log('scrolling',e);

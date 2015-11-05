@@ -54,17 +54,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ready: function(){
         this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,1) 100%),' + "url('"+this.bgImgUrl+"')";
         this.style.backgroundRepeat = 'no-repeat';
-        this.style.backgroundSize = 'cover';
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
         'mousewheel': '_scrollHandler'
       },
       properties: {
+        mediaQuery: {type: Object, notify: true, observer: '_mediaQueryChanged'},
         host: {type: String, value:{first:'justin',last:'austin'}, notify: true},
         bgImgUrl: {type: String, value:'../../images/ww4.jpg', notify: true},
         dataRoute: {type: String, notify: true},
         elementName: {type: String, value: 'home-page', notify: true}
+      },
+      _mediaQueryChanged: function(mediaQuery){
+        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : 'center';
       },
       _formatFirst: function(first){
         return first.toUpperCase();
