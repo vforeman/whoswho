@@ -1,0 +1,110 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="ww-timer">
+  <template>
+    <style>
+      :host {
+        display: block;
+        @apply(--layout-horizontal);
+        color:var(--ww-off-white);
+        font-family: 'Helvetica';
+      }
+      .label{
+        font-family: 'Helvetica';
+        font-weight:lighter;
+        font-size: 2em;
+      }
+      .count{
+        font-family: 'Helvetica';
+        font-size: var(--timer-count-font-size);
+      }
+      .quantum{
+        margin: 0px 16px;
+      }
+    </style>
+    <div class='layout vertical quantum'>
+      <span class='self-center count flex'>~</span>
+    </div>
+    <div class='layout vertical quantum'>
+      <span class='self-center count flex'>{{days}}</span>
+      <span class='self-center label flex'>days</span>
+    </div>
+    <div class='layout vertical quantum'>
+      <span class='self-center count flex'>{{hours}}</span>
+      <span class='self-center label flex'>hours</span>
+    </div>
+    <div class='layout vertical quantum'>
+      <span class='self-center count flex'>{{minutes}}</span>
+      <span class='self-center label flex'>minutes</span>
+    </div>
+    <div class='layout vertical quantum'>
+      <span class='self-center count flex'>{{seconds}}</span>
+      <span class='self-center label flex'>seconds</span>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'ww-timer',
+      created: function(){
+      },
+      ready: function(){
+        this.initializeClock('.count-down-display', this.deadline);
+      },
+      behaviors: [],
+      listeners:{
+      },
+      properties: {
+        days: {type: Number, notify: true},
+        hours: {type: Number, notify: true},
+        minutes: {type: Number, notify: true},
+        seconds: {type: Number, notify: true},
+        deadline: {type: String, value: 'December 20 2015 22:00:00 UTC-0800', notify: true},
+        elementName: {type: String, value: 'ww-timer', notify: true}
+      },
+      getTimeRemaining:function(endtime){
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        this.seconds = Math.floor( (t/1000) % 60 );
+        this.minutes = Math.floor( (t/1000/60) % 60 );
+        this.hours = Math.floor( (t/(1000*60*60)) % 24 );
+        this.days = Math.floor( t/(1000*60*60*24) );
+        return {
+          total: t,
+          days: this.days,
+          hours: this.hours,
+          minutes: this.minutes,
+          seconds: this.seconds
+        };
+      },
+      initializeClock:function(clockElement, endtime) {
+        this.updateClock();
+        this.timeinterval = setInterval(this.updateClock.bind(this),1000);
+      },
+      updateClock:function (){
+        var t = this.getTimeRemaining(this.deadline);
+        //
+        // this.daysSpan.innerHTML = t.days;
+        // this.hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+        // this.minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+        // this.secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+        if (t.total <= 0) {
+          clearInterval(this.timeinterval);
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

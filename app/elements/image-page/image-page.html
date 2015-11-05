@@ -31,15 +31,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ready: function(){
         this.style.backgroundImage = "url('"+this.bgImgUrl+"')";
         this.style.backgroundRepeat = 'no-repeat';
-        this.style.backgroundSize = 'cover';
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
           'mousewheel': '_scrollHandler'
       },
       properties: {
+        mediaQuery: {type: Object, notify: true, observer: '_mediaQueryChanged'},
         bgImgUrl: {type: String, value:'../../images/ww2.jpg', notify: true},
         elementName: {type: String, value: 'image-page', notify: true}
+      },
+      _mediaQueryChanged: function(mediaQuery){
+        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : 'center';
       },
       _scrollHandler: function(e){
         console.log('scrolling',e);

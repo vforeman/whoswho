@@ -16,18 +16,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
-        @apply(--layout-horizontal);
+        @apply(--layout-vertical);
+        height:100%;
+        color: var(--ww-off-white);
+      }
+      #content{
+        height: 100%;
+      }
+      .first{
+        font-weight: bolder;
+        font-family: 'Consolas';
       }
     </style>
-    <span class='flex'></span>
-    <div class='flex layout vertical self-center'>
-      <span>logo</span>
-      <span>hosted by</span>
-      <div class=layout horizontal>
-        <span>{{host.first}}</span>
-        <span>{{host.last}}</span>
+    <div id='content' class='layout horizontal self-center '>
+      <span class='flex'></span>
+      <div class='layout vertical'>
+        <span class='flex self-center'>logo</span>
+        <span class='flex self-center'>hosted by</span>
+        <div class='layout horizontal flex self-center'>
+          <span class='first'>{{_formatFirst(host.first)}}</span>
+          <span class='last'>{{host.last}}</span>
+        </div>
+        <ww-timer class='flex self-center'>s</ww-timer>
+        <whoswho-toolbar class='flex self-center' exclude='{{dataRoute}}'></whoswho-toolbar>
       </div>
-      <whoswho-toolbar exclude='{{dataRoute}}'></whoswho-toolbar>
+      <span class='flex'></span>
     </div>
   </template>
   <script>
@@ -41,17 +54,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ready: function(){
         this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,1) 100%),' + "url('"+this.bgImgUrl+"')";
         this.style.backgroundRepeat = 'no-repeat';
-        this.style.backgroundSize = 'cover';
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
         'mousewheel': '_scrollHandler'
       },
       properties: {
+        mediaQuery: {type: Object, notify: true, observer: '_mediaQueryChanged'},
         host: {type: String, value:{first:'justin',last:'austin'}, notify: true},
         bgImgUrl: {type: String, value:'../../images/ww4.jpg', notify: true},
         dataRoute: {type: String, notify: true},
         elementName: {type: String, value: 'home-page', notify: true}
+      },
+      _mediaQueryChanged: function(mediaQuery){
+        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : 'center';
+      },
+      _formatFirst: function(first){
+        return first.toUpperCase();
       },
       _scrollHandler: function(e){
         console.log('scrolling',e);

@@ -10,12 +10,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
-<link rel="import" href="../../bower_components/neon-animation/animations/slide-up-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/slide-from-right-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/slide-left-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-up-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/scale-up-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/scale-down-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-down-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/slide-from-left-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/slide-right-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
 
 <link rel="import" href="../home-page/home-page.html">
 <link rel="import" href="../event-page/event-page.html">
@@ -32,13 +36,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height:100%;
       }
     </style>
+    <template is='dom-if' if='{{isMobile}}'>
+      <link rel="import" href="mobile-theme.html">
+    </template>
+    <template is='dom-if' if='{{isDesktop}}'>
+      <link rel="import" href="desktop-theme.html">
+    </template>
     <neon-animated-pages id='pages' attr-for-selected="data-route" selected="{{route}}"
-      entry-animation='slide-from-right-animation'
-      exit-animation='slide-left-animation'>
-      <home-page data-route='home'></home-page>
-      <image-page data-route='whoswho'></image-page>
-      <event-page data-route='event'></event-page>
-      <about-page data-route='about'></image-page>
+      entry-animation='{{entryAnimation}}'
+      exit-animation='{{exitAnimation}}'
+      activate-event='iron-activate'
+      on-iron-activate='_updateAnimations'>
+      <home-page data-route='home' media-query='{{mediaQuery}}'></home-page>
+      <image-page data-route='whoswho' media-query='{{mediaQuery}}'></image-page>
+      <event-page data-route='event' media-query='{{mediaQuery}}'></event-page>
+      <about-page data-route='about' media-query='{{mediaQuery}}'></image-page>
     </neon-animated-pages>
   </template>
   <script>
@@ -54,12 +66,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       behaviors: [],
       listeners:{
         'select-next-neon-page': '_nextPage',
-        'select-previous-neon-page': '_prevPage'
+        'select-previous-neon-page': '_prevPage',
+        'iron-activate': '_updateAnimations'
       },
       properties: {
+        entryAnimation: {type: String, notify: true},
+        exitAnimation: {type: String, notify: true},
+        mediaQuery: {type: Object, notify: true, computed: '_mediaQuery(isDesktop, isMobile)'},
+        isDesktop: {type: Boolean, notify: true},
+        isMobile: {type: Boolean, notify: true},
         routes: {type: Array, value: ['home','whoswho','event','about']},
         route: {type: String, notify: true},
         elementName: {type: String, value: 'whoswho-app', notify: true}
+      },
+      _updateAnimations: function(e){
+        console.log('>>>updating animations', e.detail);
+      },
+      _mediaQuery: function(isDesktop, isMobile){
+        return {isDesktop: isDesktop, isMobile: isMobile};
       },
       _nextPage: function(e){
         var url = ('/'+this.routes[(this.routes.indexOf(this.route) + 1) % 4]).replace('home','');
