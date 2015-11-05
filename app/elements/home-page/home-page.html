@@ -40,7 +40,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         elementName: {type: String, value: 'home-page', notify: true}
       },
       _scrollHandler: function(e){
-        console.log('scrolling',e.detail);
+        console.log('scrolling',e);
+        if(e.wheelDelta > 0){
+          //scroll up
+          this.fire('select-previous-neon-page');
+        } else if(e.wheelDelta < 0){
+          //scroll down
+          this.fire('select-next-neon-page');
+        }
       }
     });
   })();
