@@ -16,10 +16,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
+        @apply(--layout-horizontal);
       }
     </style>
-    <whoswho-toolbar exclude='{{dataRoute}}'></whoswho-toolbar>
-    <div>Hello from <span>{{elementName}}</span></div>
+    <span class='flex'></span>
+    <div class='flex layout vertical self-center'>
+      <span>logo</span>
+      <span>hosted by</span>
+      <div class=layout horizontal>
+        <span>{{host.first}}</span>
+        <span>{{host.last}}</span>
+      </div>
+      <whoswho-toolbar exclude='{{dataRoute}}'></whoswho-toolbar>
+    </div>
   </template>
   <script>
   (function() {
@@ -30,12 +39,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       created: function(){
       },
       ready: function(){
+        this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,1) 100%),' + "url('"+this.bgImgUrl+"')";
+        this.style.backgroundRepeat = 'no-repeat';
+        this.style.backgroundSize = 'cover';
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
         'mousewheel': '_scrollHandler'
       },
       properties: {
+        host: {type: String, value:{first:'justin',last:'austin'}, notify: true},
+        bgImgUrl: {type: String, value:'../../images/ww4.jpg', notify: true},
         dataRoute: {type: String, notify: true},
         elementName: {type: String, value: 'home-page', notify: true}
       },

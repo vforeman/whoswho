@@ -17,38 +17,51 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         @apply(-layout-horizontal);
       }
+      button.ui.button.tickets{
+        background:red;
+        color:white;
+        border-color:red;
+      }
+      button.ui.button{
+        width:150px;
+        height: 36px;
+        background: transparent;
+        color:white;
+        border-width:1px;
+        border-style: solid;
+      }
     </style>
     <template is='dom-if' if='{{onHomePage}}'>
       <a data-route='event' href='/event'>
-        <button name="event">Event</button>
+        <button class='ui button' name="event">Event</button>
       </a>
       <a data-route='tickets'>
-        <button name="tickets">Tickets</button>
+        <button class='ui button tickets' name="tickets">Tickets</button>
       </a>
       <a data-route='about' href='/about'>
-        <button name="about">About</button>
+        <button class='ui button' name="about">About</button>
       </a>
     </template>
     <template is='dom-if' if='{{onEventPage}}'>
       <a data-route='about' href='/about'>
-        <button name="about">About</button>
+        <button class='ui button' name="about">About</button>
       </a>
       <a data-route='tickets' >
-        <button name="tickets">Tickets</button>
+        <button class='ui button tickets' name="tickets">Tickets</button>
       </a>
       <a data-route='home' href='/'>
-        <button name="home">Home</button>
+        <button class='ui button' name="home">Home</button>
       </a>
     </template>
     <template is='dom-if' if='{{onAboutPage}}'>
       <a data-route='home' href='/'>
-        <button name="home">Home</button>
+        <button class='ui button' name="home">Home</button>
       </a>
       <a data-route='tickets'>
-        <button name="tickets">Tickets</button>
+        <button class='ui button tickets' name="tickets">Tickets</button>
       </a>
       <a data-route='event' href='/event'>
-        <button name="event">Event</button>
+        <button class='ui button' name="event">Event</button>
       </a>
     </template>
   </template>
