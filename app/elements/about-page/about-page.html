@@ -17,7 +17,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
+        linear-gradient(
+          rgba(255, 0, 0, 0.45),
+          rgba(255, 0, 0, 0.45)
+        ),
       }
+
     </style>
     <whoswho-toolbar exclude='{{dataRoute}}'></whoswho-toolbar>
     <div>Hello from <span>{{elementName}}</span></div>
@@ -31,12 +36,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       created: function(){
       },
       ready: function(){
+        this.style.backgroundImage = 'linear-gradient(rgba(255, 0, 0, 0.45), rgba(255, 0, 0, 0.45)),' + "url('"+this.bgImgUrl+"')";
+        this.style.backgroundRepeat = 'no-repeat';
+        this.style.backgroundSize = 'cover';
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
           'mousewheel': '_scrollHandler'
       },
       properties: {
+        bgImgUrl: {type: String, value:'../../images/ww3.jpg', notify: true},
         dataRoute: {type: String, notify: true},
         elementName: {type: String, value: 'about-page', notify: true}
       },
