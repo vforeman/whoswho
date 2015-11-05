@@ -19,19 +19,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <template is='dom-if' if='{{onHomePage}}'>
-      <button name="event">Event</button>
-      <button name="tickets">Tickets</button>
-      <button name="about">About</button>
+      <a data-route='event' href='/event'>
+        <button name="event">Event</button>
+      </a>
+      <a data-route='tickets'>
+        <button name="tickets">Tickets</button>
+      </a>
+      <a data-route='about' href='/about'>
+        <button name="about">About</button>
+      </a>
     </template>
     <template is='dom-if' if='{{onEventPage}}'>
-      <button name="about">About</button>
-      <button name="tickets">Tickets</button>
-      <button name="event">Home</button>
+      <a data-route='about' href='/about'>
+        <button name="about">About</button>
+      </a>
+      <a data-route='tickets' >
+        <button name="tickets">Tickets</button>
+      </a>
+      <a data-route='home' href='/'>
+        <button name="home">Home</button>
+      </a>
     </template>
     <template is='dom-if' if='{{onAboutPage}}'>
-      <button name="home">Home</button>
-      <button name="tickets">Tickets</button>
-      <button name="event">Event</button>
+      <a data-route='home' href='/'>
+        <button name="home">Home</button>
+      </a>
+      <a data-route='tickets'>
+        <button name="tickets">Tickets</button>
+      </a>
+      <a data-route='event' href='/event'>
+        <button name="event">Event</button>
+      </a>
     </template>
   </template>
   <script>
