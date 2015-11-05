@@ -62,16 +62,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <!-- Main Content -->
         <div class="content">
-          <neon-animated-pages attr-for-selected="data-route" selected="{{route}}"
-            entry-animation='slide-from-right-animation'
-            exit-animation='slide-left-animation'>
-            <home-page data-route='home'></home-page>
-            <image-page data-route='whoswho'></image-page>
-            <event-page data-route='event'></event-page>
-            <about-page data-route='about'></image-page>
-          </neon-animated-pages>
+          <whoswho-app route='{{route}}'></whoswho-app>
         </div>
-    
+
 
     <!-- Uncomment next block to enable Service Worker support (1/2) -->
     <!--

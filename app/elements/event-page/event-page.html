@@ -33,10 +33,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
+          'mousewheel': '_scrollHandler'
       },
       properties: {
         dataRoute: {type: String, notify: true},
         elementName: {type: String, value: 'event-page', notify: true}
+      },
+      _scrollHandler: function(e){
+        console.log('scrolling',e);
+        if(e.wheelDelta > 0){
+          //scroll up
+          this.fire('select-previous-neon-page');
+        } else if(e.wheelDelta < 0){
+          //scroll down
+          this.fire('select-next-neon-page');
+        }
       }
     });
   })();

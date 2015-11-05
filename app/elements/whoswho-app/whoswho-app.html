@@ -9,15 +9,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-up-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-from-right-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-left-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
 
+<link rel="import" href="../home-page/home-page.html">
+<link rel="import" href="../event-page/event-page.html">
+<link rel="import" href="../image-page/image-page.html">
+<link rel="import" href="../about-page/about-page.html">
 <dom-module id="whoswho-app">
   <template>
     <style>
       :host {
         display: block;
+        height: 100%;
+      }
+      neon-animated-pages{
+        height:100%;
       }
     </style>
-    <div>Hello from <span>{{elementName}}</span></div>
+    <neon-animated-pages id='pages' attr-for-selected="data-route" selected="{{route}}"
+      entry-animation='slide-from-right-animation'
+      exit-animation='slide-left-animation'>
+      <home-page data-route='home'></home-page>
+      <image-page data-route='whoswho'></image-page>
+      <event-page data-route='event'></event-page>
+      <about-page data-route='about'></image-page>
+    </neon-animated-pages>
   </template>
   <script>
   (function() {
@@ -31,9 +51,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       behaviors: [],
       listeners:{
+        'select-next-neon-page': '_nextPage',
+        'select-previous-neon-page': '_prevPage'
       },
       properties: {
+        route: {type: String, notify: true},
         elementName: {type: String, value: 'whoswho-app', notify: true}
+      },
+      _nextPage: function(e){
+        this.$.pages.selectNext();
+      },
+      _prevPage: function(e){
+        this.$.pages.selectPrevious();
       }
     });
   })();
