@@ -16,9 +16,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
+        @apply(--layout-horizontal);
+        padding: 144px 144px;
       }
     </style>
-    <whoswho-toolbar exclude='{{dataRoute}}'></whoswho-toolbar>
+    <whoswho-toolbar class='self-center' exclude='{{dataRoute}}'></whoswho-toolbar>
     <div>Hello from <span>{{elementName}}</span></div>
   </template>
   <script>
@@ -30,7 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       created: function(){
       },
       ready: function(){
-        this.style.backgroundImage = 'linear-gradient(rgba(255, 0, 0, 0.45), rgba(255, 0, 0, 0.45)),' + "url('"+this.bgImgUrl+"')";
+        this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,.9) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,.3) 100%),' + "url('"+this.bgImgUrl+"')";
         this.style.backgroundRepeat = 'no-repeat';
         this.style.backgroundSize = 'cover';
       },
