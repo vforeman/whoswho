@@ -1,0 +1,81 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="whoswho-toolbar">
+  <template>
+    <style>
+      :host {
+        display: block;
+        @apply(-layout-horizontal);
+      }
+    </style>
+    <template is='dom-if' if='{{onHomePage}}'>
+      <a data-route='event' href='/event'>
+        <button name="event">Event</button>
+      </a>
+      <a data-route='tickets'>
+        <button name="tickets">Tickets</button>
+      </a>
+      <a data-route='about' href='/about'>
+        <button name="about">About</button>
+      </a>
+    </template>
+    <template is='dom-if' if='{{onEventPage}}'>
+      <a data-route='about' href='/about'>
+        <button name="about">About</button>
+      </a>
+      <a data-route='tickets' >
+        <button name="tickets">Tickets</button>
+      </a>
+      <a data-route='home' href='/'>
+        <button name="home">Home</button>
+      </a>
+    </template>
+    <template is='dom-if' if='{{onAboutPage}}'>
+      <a data-route='home' href='/'>
+        <button name="home">Home</button>
+      </a>
+      <a data-route='tickets'>
+        <button name="tickets">Tickets</button>
+      </a>
+      <a data-route='event' href='/event'>
+        <button name="event">Event</button>
+      </a>
+    </template>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'whoswho-toolbar',
+      created: function(){
+      },
+      ready: function(){
+      },
+      behaviors: [],
+      listeners:{
+      },
+      properties: {
+        onAboutPage: {type: String, notify: true, computed: "_isVisible(exclude,'about')"},
+        onEventPage: {type: String, notify: true, computed: "_isVisible(exclude,'event')"},
+        onHomePage: {type: String, notify: true, computed: "_isVisible(exclude,'home')"},
+        exclude: {type: String, notify: true},
+        elementName: {type: String, value: 'whoswho-toolbar', notify: true}
+      },
+      _isVisible: function(parentPage, btnType){
+        return parentPage === btnType;
+      }
+    });
+  })();
+  </script>
+</dom-module>
