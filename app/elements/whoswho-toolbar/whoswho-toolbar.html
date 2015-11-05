@@ -15,9 +15,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
+        @apply(-layout-horizontal);
       }
     </style>
-    <div>Hello from <span>{{elementName}}</span></div>
+    <template is='dom-if' if='{{onHomePage}}'>
+      <button name="event">Event</button>
+      <button name="tickets">Tickets</button>
+      <button name="about">About</button>
+    </template>
+    <template is='dom-if' if='{{onEventPage}}'>
+      <button name="about">About</button>
+      <button name="tickets">Tickets</button>
+      <button name="event">Home</button>
+    </template>
+    <template is='dom-if' if='{{onAboutPage}}'>
+      <button name="home">Home</button>
+      <button name="tickets">Tickets</button>
+      <button name="event">Event</button>
+    </template>
   </template>
   <script>
   (function() {
@@ -33,7 +48,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       listeners:{
       },
       properties: {
+        onAboutPage: {type: String, notify: true, computed: "_isVisible(exclude,'about')"},
+        onEventPage: {type: String, notify: true, computed: "_isVisible(exclude,'event')"},
+        onHomePage: {type: String, notify: true, computed: "_isVisible(exclude,'home')"},
+        exclude: {type: String, notify: true},
         elementName: {type: String, value: 'whoswho-toolbar', notify: true}
+      },
+      _isVisible: function(parentPage, btnType){
+        return parentPage === btnType;
       }
     });
   })();
