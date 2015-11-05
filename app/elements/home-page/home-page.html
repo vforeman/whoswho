@@ -25,14 +25,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       .first{
         font-weight: bolder;
-        font-family: 'Consolas';
+      }
+      .hosted-by{
+        font-weight: bolder;
+        font-family: 'September-Mornings';
+        font-size: 96px;
       }
     </style>
     <div id='content' class='layout horizontal self-center '>
       <span class='flex'></span>
       <div class='layout vertical'>
         <span class='flex self-center'>logo</span>
-        <span class='flex self-center'>hosted by</span>
+        <span class='flex self-center hosted-by'>hosted by</span>
         <div class='layout horizontal flex self-center'>
           <span class='first'>{{_formatFirst(host.first)}}</span>
           <span class='last'>{{host.last}}</span>
