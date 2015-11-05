@@ -17,7 +17,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         @apply(--layout-horizontal);
         color:var(--ww-off-white);
-        font-family: 'Helvetica';
       }
       .label{
         font-family: 'Helvetica';
@@ -25,31 +24,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         font-size: 2em;
       }
       .count{
-        font-family: 'Helvetica';
-        font-size: var(--timer-count-font-size);
+        font-family: 'octogonal';
       }
       .quantum{
         margin: 0px 16px;
       }
     </style>
     <div class='layout vertical quantum'>
-      <span class='self-center count flex'>~</span>
+      <div class='self-center count flex'>~</div>
     </div>
     <div class='layout vertical quantum'>
-      <span class='self-center count flex'>{{days}}</span>
-      <span class='self-center label flex'>days</span>
+      <div class='self-center count flex'>{{days}}</div>
+      <div class='self-center label flex'>days</div>
     </div>
     <div class='layout vertical quantum'>
-      <span class='self-center count flex'>{{hours}}</span>
-      <span class='self-center label flex'>hours</span>
+      <div class='self-center count flex'>{{hours}}</div>
+      <div class='self-center label flex'>hours</div>
     </div>
     <div class='layout vertical quantum'>
-      <span class='self-center count flex'>{{minutes}}</span>
-      <span class='self-center label flex'>minutes</span>
+      <div class='self-center count flex'>{{minutes}}</div>
+      <div class='self-center label flex'>minutes</div>
     </div>
     <div class='layout vertical quantum'>
-      <span class='self-center count flex'>{{seconds}}</span>
-      <span class='self-center label flex'>seconds</span>
+      <div class='self-center count flex'>{{seconds}}</div>
+      <div class='self-center label flex'>seconds</div>
     </div>
   </template>
   <script>

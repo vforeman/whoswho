@@ -22,6 +22,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   /* Application theme */
 
   @font-face{
+    font-family: 'octogonal';
+    src: url('octogonal.ttf');
+  }
+  @font-face{
+    font-family: 'octogonal-bold';
+    src: url('octogonal-bold.ttf');
+  }
+  @font-face{
     font-family: 'September-Mornings';
     src: url('september-mornings.ttf');
   }
@@ -66,26 +74,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   /* mobile-small */
   @media all and (min-width: 0) and (max-width: 480px) and (orientation: portrait) {
-    whoswho-app::shadow  ww-timer::shadow .count{
-      font-family: 'Helvetica';
-      font-size: 3em;
-    }
-    whoswho-app::shadow  ww-timer::shadow .label{
-      font-family: 'Helvetica';
-      font-size: 1.3em;
-    }
-    whoswho-app::shadow  ww-timer::shadow .quantum{
-      height: 72px;
-      @apply(--layout-self-end);
-    }
-    whoswho-app::shadow  ww-timer{
-      height: 50px;
-      margin: 0px 16px;
-    }
 
-    whoswho-app::shadow  whoswho-toolbar::shadow button.ui.button{
-      width: 96px;
-    }
+    
    }
 
   /* General styles */
