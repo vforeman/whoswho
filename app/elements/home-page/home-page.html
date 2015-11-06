@@ -78,7 +78,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         elementName: {type: String, value: 'home-page', notify: true}
       },
       _mediaQueryChanged: function(mediaQuery){
-        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : 'center';
+        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : '1200px auto';
+        if(this.mediaQuery.isMobile){
+          this.style.backgroundPosition = 'center';
+        }
       },
       _formatFirst: function(first){
         return first.toUpperCase();

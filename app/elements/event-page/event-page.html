@@ -18,10 +18,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         @apply(--layout-horizontal);
         padding: 144px 144px;
+        color: var(--ww-off-white);
+      }
+      p{
+        color: var(--ww-off-white);
       }
     </style>
-    <whoswho-toolbar class='self-center' exclude='{{dataRoute}}'></whoswho-toolbar>
-    <div class='flex'>Hello from <span>{{elementName}}</span></div>
+    <div class='flex'></div>
+    <div class='layout vertical'>
+      <div class=' self-center'>
+        <span class='title-1 self-center'>{{_toUpperCase(titleOne)}}</span><span class='title-2 self-center'>{{_toUpperCase(titleTwo)}}</span>
+      </div>
+      <whoswho-toolbar class='self-center' exclude='{{dataRoute}}'></whoswho-toolbar>
+    </div>
   </template>
   <script>
   (function() {
@@ -40,13 +49,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           'mousewheel': '_scrollHandler'
       },
       properties: {
+        titleTwo: {type: Object, notify: true, value: ' It is long established'},
+        titleOne: {type: Object, notify: true, value: 'distracted by the readable content '},
         mediaQuery: {type: Object, notify: true, observer: '_mediaQueryChanged'},
         bgImgUrl: {type: String, value:'../../images/ww1.jpg', notify: true},
         dataRoute: {type: String, notify: true},
         elementName: {type: String, value: 'event-page', notify: true}
       },
+      _toUpperCase: function(str){
+        return str.toUpperCase();
+      },
       _mediaQueryChanged: function(mediaQuery){
-        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : 'center';
+        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : '1200px auto';
+        if(this.mediaQuery.isMobile){
+          this.style.backgroundPosition = 'center';
+        }
       },
       _scrollHandler: function(e){
         console.log('scrolling',e);

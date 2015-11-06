@@ -18,7 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
-    <div>Hello from <span>{{elementName}}</span></div>
+    <!-- <div>Hello from <span>{{elementName}}</span></div> -->
   </template>
   <script>
   (function() {
@@ -42,7 +42,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         elementName: {type: String, value: 'image-page', notify: true}
       },
       _mediaQueryChanged: function(mediaQuery){
-        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : 'center';
+        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : '1200px auto';
+        if(this.mediaQuery.isMobile){
+          this.style.backgroundPosition = 'center';
+        }
       },
       _scrollHandler: function(e){
         console.log('scrolling',e);
