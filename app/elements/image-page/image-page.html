@@ -38,13 +38,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       properties: {
         mediaQuery: {type: Object, notify: true, observer: '_mediaQueryChanged'},
-        bgImgUrl: {type: String, value:'../../images/ww2.jpg', notify: true},
+        bgImgUrl: {type: String, value:'../../images/whoswhoweb.jpg', notify: true},
         elementName: {type: String, value: 'image-page', notify: true}
       },
       _mediaQueryChanged: function(mediaQuery){
-        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : '1200px auto';
+        this.style.backgroundSize = this.mediaQuery.isDesktop ? '' : '1200px auto';
+          this.style.backgroundPosition = '25% center';
         if(this.mediaQuery.isMobile){
-          this.style.backgroundPosition = 'center';
+          this.style.backgroundPosition = '25% center';
         }
       },
       _scrollHandler: function(e){

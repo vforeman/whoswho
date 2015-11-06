@@ -16,20 +16,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
-        @apply(--layout-horizontal);
+        @apply(--layout-vertical);
         padding: 144px 144px;
+        padding-right: 44px;
         color: var(--ww-off-white);
+        height: calc(2896px/3);
       }
       p{
         color: var(--ww-off-white);
       }
     </style>
-    <div class='flex'></div>
-    <div class='layout vertical'>
-      <div class=' self-center'>
-        <span class='title-1 self-center'>{{_toUpperCase(titleOne)}}</span><span class='title-2 self-center'>{{_toUpperCase(titleTwo)}}</span>
+    <div class='layout horizontal'>
+      <div class='flex'>
+
       </div>
-      <whoswho-toolbar class='self-center' exclude='{{dataRoute}}'></whoswho-toolbar>
+      <div class='content layout vertical flex self-stretch'>
+        <div class=' self-center'></div>
+        <div class=' self-center detail'></div>
+        <whoswho-toolbar class='self-end' exclude='{{dataRoute}}'></whoswho-toolbar>
+      </div>
     </div>
   </template>
   <script>
@@ -41,8 +46,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       created: function(){
       },
       ready: function(){
-        this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,.9) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,.3) 100%),' + "url('"+this.bgImgUrl+"')";
-        this.style.backgroundRepeat = 'no-repeat';
+        // this.style.backgroundImage = "url('"+this.bgImgUrl+"')";
+        // this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,.9) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,.3) 100%),' + "url('"+this.bgImgUrl+"')";
+        // this.style.backgroundRepeat = 'no-repeat';
+        this.detail = 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using , making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for  will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
@@ -51,8 +58,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       properties: {
         titleTwo: {type: Object, notify: true, value: ' It is long established'},
         titleOne: {type: Object, notify: true, value: 'distracted by the readable content '},
+        detail: {type: Object, notify: true},
         mediaQuery: {type: Object, notify: true, observer: '_mediaQueryChanged'},
-        bgImgUrl: {type: String, value:'../../images/ww1.jpg', notify: true},
+        bgImgUrl: {type: String, value:'../../images/whoswhoweb.jpg', notify: true},
         dataRoute: {type: String, notify: true},
         elementName: {type: String, value: 'event-page', notify: true}
       },
@@ -60,10 +68,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         return str.toUpperCase();
       },
       _mediaQueryChanged: function(mediaQuery){
-        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : '1200px auto';
-        if(this.mediaQuery.isMobile){
-          this.style.backgroundPosition = 'center';
-        }
+        // this.style.backgroundSize = this.mediaQuery.isDesktop ? '' : '1200px auto';
+        // this.style.backgroundPosition = 'center 50%';
+        // if(this.mediaQuery.isMobile){
+        //   this.style.backgroundPosition = 'center';
+        // }
       },
       _scrollHandler: function(e){
         console.log('scrolling',e);

@@ -19,6 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         padding: 144px 144px;
         @apply(--layout-horizontal)
+        height: calc(2896px/3);
       }
 
     </style>
@@ -34,8 +35,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       created: function(){
       },
       ready: function(){
-        this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,1) 100%),' + "url('"+this.bgImgUrl+"')";
-        this.style.backgroundRepeat = 'no-repeat';
+        // this.style.backgroundImage = "url('"+this.bgImgUrl+"')";
+        // this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,1) 100%),' + "url('"+this.bgImgUrl+"')";
+        // this.style.backgroundRepeat = 'no-repeat';
       },
       behaviors: [Polymer.NeonAnimatableBehavior],
       listeners:{
@@ -48,10 +50,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         elementName: {type: String, value: 'about-page', notify: true}
       },
       _mediaQueryChanged: function(mediaQuery){
-        this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : '1200px auto';
-        if(this.mediaQuery.isMobile){
-          this.style.backgroundPosition = 'center';
-        }
+        // this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : '1200px auto';
+        // if(this.mediaQuery.isMobile){
+        //   this.style.backgroundPosition = 'center';
+        // }
       },
       _scrollHandler: function(e){
         console.log('scrolling',e);

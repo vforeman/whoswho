@@ -30,7 +30,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style>
       :host {
         display: block;
-        height: 100%;
+        height: 2896px;
+        scroll-behavior: smooth;
       }
       neon-animated-pages{
         height:100%;
@@ -42,16 +43,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <template is='dom-if' if='{{isDesktop}}'>
       <link rel="import" href="desktop-theme.html">
     </template>
-    <neon-animated-pages id='pages' attr-for-selected="data-route" selected="{{route}}"
+    <!-- <neon-animated-pages id='pages' attr-for-selected="data-route" selected="{{route}}"
       entry-animation='{{entryAnimation}}'
       exit-animation='{{exitAnimation}}'
       activate-event='iron-activate'
-      on-iron-activate='_updateAnimations'>
-      <home-page data-route='home' media-query='{{mediaQuery}}'></home-page>
-      <image-page data-route='whoswho' media-query='{{mediaQuery}}'></image-page>
-      <event-page data-route='event' media-query='{{mediaQuery}}'></event-page>
-      <about-page data-route='about' media-query='{{mediaQuery}}'></image-page>
-    </neon-animated-pages>
+      on-iron-activate='_updateAnimations'> -->
+      <home-page id='home' data-route='home' media-query='{{mediaQuery}}'></home-page>
+      <!-- <image-page data-route='whoswho' media-query='{{mediaQuery}}'></image-page> -->
+      <event-page id='event' data-route='event' media-query='{{mediaQuery}}'></event-page>
+      <about-page id='about' data-route='about' media-query='{{mediaQuery}}'></image-page>
+    <!-- </neon-animated-pages> -->
   </template>
   <script>
   (function() {
@@ -62,6 +63,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       created: function(){
       },
       ready: function(){
+        this.style.backgroundImage = "url('"+this.bgImgUrl+"')";
+        this.style.backgroundRepeat = 'no-repeat';
+
       },
       behaviors: [],
       listeners:{
@@ -70,12 +74,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'iron-activate': '_updateAnimations'
       },
       properties: {
+        bgImgUrl: {type: String, value:'../../images/whoswhoweb.jpg', notify: true},
         entryAnimation: {type: String, notify: true},
         exitAnimation: {type: String, notify: true},
         mediaQuery: {type: Object, notify: true, computed: '_mediaQuery(isDesktop, isMobile)'},
         isDesktop: {type: Boolean, notify: true},
         isMobile: {type: Boolean, notify: true},
-        routes: {type: Array, value: ['home','whoswho','event','about']},
+        routes: {type: Array, value: ['home','event','about']},
         route: {type: String, notify: true},
         elementName: {type: String, value: 'whoswho-app', notify: true}
       },
@@ -84,16 +89,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       _mediaQuery: function(isDesktop, isMobile){
         console.log(isDesktop,isMobile)
+        this.style.backgroundSize = isDesktop ? '' : '1200px auto';
+        this.style.backgroundPosition = 'center 50%';
+        if(isMobile){
+          this.style.backgroundPosition = 'center';
+        }
         return {isDesktop: isDesktop, isMobile: isMobile};
       },
       _nextPage: function(e){
-        var url = ('/'+this.routes[(this.routes.indexOf(this.route) + 1) % 4]).replace('home','');
+        console.log(this.route)
+        var url = ('/'+this.routes[(this.routes.indexOf(this.route) + 1) % 3]).replace('home','');
         page(url);
+        this.$[this.route].scrollIntoView();
         // this.$.pages.selectNext();
       },
       _prevPage: function(e){
-        var url = ('/'+this.routes[(this.routes.indexOf(this.route) + 3) % 4]).replace('home','');
+        console.log(this.$[this.route])
+        switch(this.route){
+          case 'home': this.$.home.scrollIntoView({block: "start", behavior: "smooth"}); break;
+          case 'event': this.$.event.scrollIntoView({block: "start", behavior: "smooth"}); break;
+          case 'about': this.$.about.scrollIntoView({block: "start", behavior: "smooth"}); break;
+        }
+        // var page = this.routes[(this.routes.indexOf(this.route) + 3) % 4];
+        // var page = this.routes[(this.routes.indexOf(this.route) + 3) % 4];
+        var url = ('/'+this.routes[(this.routes.indexOf(this.route) + 2) % 3]).replace('home','');
         page(url);
+        this.$[this.route].scrollIntoView({block: "start", behavior: "smooth"});
         // this.$.pages.selectPrevious();
       }
     });
