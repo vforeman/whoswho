@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animatable-behavior.html">
 
 <dom-module id="event-page">
@@ -17,24 +18,54 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
         @apply(--layout-vertical);
-        padding: 144px 144px;
+        padding: 144px 44px;
         padding-right: 44px;
         color: var(--ww-off-white);
         height: calc(2896px/3);
+        height: -webkit-calc(2896px/3);
       }
-      p{
-        color: var(--ww-off-white);
+      whoswho-toolbar{
+        margin-top: 44px;
+      }
+      span.bullet{
+        font-size: 1.2em;
+        font-family: 'geo-sans-light-italic';
+        margin-left: 4px;
+      }
+      #bullets{
+        background: rgba(0,0,0,0.7);
+        max-height: 450px;
+        padding: 0px 16px;
+      }
+      div.blurb{
+        margin: 16px 0px;
+        font-size: 1.3em;
+        font-family: 'geo-sans-light';
+        line-height: 1.5;
       }
     </style>
     <div class='layout horizontal'>
-      <div class='flex'>
-
+      <div id='bullets' class='flex layout vertical'>
+        <div class='blurb'>
+          Justin Austin and John Franklin bring you the highly anticipated inaugural event entitled Who's Who: Atlanta.
+           This is where you want to be this holiday season!
+           It takes place on Sunday, December 20, 2015, with doors opening at 10PM and the event
+           going until 2AM. Attendees of the event will recieve:
+        </div>
+        <template is='dom-repeat' items='{{bullets}}'>
+          <div class='layout horizontal'>
+            <iron-icon src='../../images/rose-bullet.png'></iron-icon>
+            <span class='bullet self-center'>{{item}}</span>
+          </div>
+        </template>
+        <div class='blurb'>
+          Plus many more surprises! This will be an unforgettable experience that you won't want to miss this holiday season.
+        </div>
       </div>
-      <div class='content layout vertical flex self-stretch'>
-        <div class=' self-center'></div>
-        <div class=' self-center detail'></div>
-        <whoswho-toolbar class='self-end' exclude='{{dataRoute}}'></whoswho-toolbar>
-      </div>
+      <span id='flexer' class='flex'></span>
+    </div>
+    <div class='content layout vertical  self-stretch'>
+      <whoswho-toolbar class='self-end' exclude='{{dataRoute}}'></whoswho-toolbar>
     </div>
   </template>
   <script>
@@ -56,6 +87,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           'mousewheel': '_scrollHandler'
       },
       properties: {
+        bullets: {type: Array, notify: true, value: [
+          'Open Bar',
+          'Free Valet',
+          'Surprise Performance',
+          "Complimentary Food Sponsored by Zaxby's",
+          'Preview of the 2016 S/S Alani Apparel Fashion Line',
+
+        ]},
         titleTwo: {type: Object, notify: true, value: ' It is long established'},
         titleOne: {type: Object, notify: true, value: 'distracted by the readable content '},
         detail: {type: Object, notify: true},

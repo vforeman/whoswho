@@ -26,6 +26,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--layout-center);
       }
       button.ui.button{
+        font-family: 'geo-sans-light';
+        font-weight: bold;
         width:150px;
         height: 36px;
         background: transparent;
@@ -35,35 +37,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <template is='dom-if' if='{{onHomePage}}'>
-      <a data-route='event' href='/event'>
+      <a data-route='event' href='/event' on-click='_onClick'>
         <button class='ui button' name="event">Event</button>
       </a>
       <a data-route='tickets'>
         <button class='ui button tickets' name="tickets">Tickets</button>
       </a>
-      <a data-route='about' href='/about'>
+      <a data-route='about' href='/about' on-click='_onClick'>
         <button class='ui button' name="about">About</button>
       </a>
     </template>
     <template is='dom-if' if='{{onEventPage}}'>
-      <a data-route='about' href='/about'>
+      <a data-route='about' href='/about' on-click='_onClick'>
         <button class='ui button' name="about">About</button>
       </a>
       <a data-route='tickets' >
         <button class='ui button tickets' name="tickets">Tickets</button>
       </a>
-      <a data-route='home' href='/'>
+      <a data-route='home' href='/' on-click='_onClick'>
         <button class='ui button' name="home">Home</button>
       </a>
     </template>
     <template is='dom-if' if='{{onAboutPage}}'>
-      <a data-route='home' href='/'>
+      <a data-route='home' href='/' on-click='_onClick'>
         <button class='ui button' name="home">Home</button>
       </a>
       <a data-route='tickets'>
         <button class='ui button tickets' name="tickets">Tickets</button>
       </a>
-      <a data-route='event' href='/event'>
+      <a data-route='event' href='/event' on-click='_onClick'>
         <button class='ui button' name="event">Event</button>
       </a>
     </template>
@@ -90,6 +92,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       _isVisible: function(parentPage, btnType){
         return parentPage === btnType;
+      },
+      _onClick: function(e){
+        console.log(e.target.name);
+        this.fire('scroll-to-page',e.target.name);
       }
     });
   })();

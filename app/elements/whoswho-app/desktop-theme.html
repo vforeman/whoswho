@@ -1,16 +1,27 @@
 <style is='custom-style'>
+  whoswho-app{
+    max-width: 1254px;
+  }
+
+  whoswho-app::shadow  home-page::shadow #hostfirst,
+  whoswho-app::shadow  home-page::shadow #hostlast{
+    margin-top:8px;
+    margin-bottom: 64px;
+  }
 
       whoswho-app::shadow  home-page::shadow ww-timer .count{
+        font-family: 'assassin$';
         font-weight: lighter;
-        font-size: 6em;
+        font-size: 4em;
         margin-bottom: 48px;
       }
       whoswho-app::shadow  home-page::shadow .spacer{
         min-height: 300px;
       }
       whoswho-app::shadow  home-page::shadow   ww-timer::shadow .label{
-        font-weight: lighter;
-          font-size: 1.3em;
+          font-family: 'geo-sans-light';
+          font-weight: lighter;
+          font-size: 1.4em;
         }
 
       whoswho-app::shadow  home-page::shadow   www-timer::shadow .quantum{
@@ -26,13 +37,13 @@
       whoswho-app::shadow  event-page::shadow   .title-2{
         margin: 16px 0px;
       }
-      whoswho-app::shadow  event-page::shadow   span{
+      /*whoswho-app::shadow  event-page::shadow   span{
         text-align: 'center';
-        font-family: 'constantine';
+        font-family: 'geo-sans-light';
         font-weight: lighter;
         line-height: 1.5em;
         font-size: 3.4em;
-      }
+      }*/
 
       whoswho-app::shadow  event-page::shadow   span.title-2{
         color: var(--ww-red);
@@ -42,8 +53,10 @@
         min-height:420px;
       }
       whoswho-app::shadow  event-page::shadow   .content{
-        max-height:256px;
+        min-width:500px;
       }
+
+
 
 
 

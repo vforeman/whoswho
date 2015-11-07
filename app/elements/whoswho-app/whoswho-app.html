@@ -69,9 +69,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       behaviors: [],
       listeners:{
-        'select-next-neon-page': '_nextPage',
-        'select-previous-neon-page': '_prevPage',
-        'iron-activate': '_updateAnimations'
+        // 'select-next-neon-page': '_nextPage',
+        // 'select-previous-neon-page': '_prevPage',
+        'iron-activate': '_updateAnimations',
+        'scroll-to-page': '_scrollToPage'
       },
       properties: {
         bgImgUrl: {type: String, value:'../../images/whoswhoweb.jpg', notify: true},
@@ -89,19 +90,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       _mediaQuery: function(isDesktop, isMobile){
         console.log(isDesktop,isMobile)
-        this.style.backgroundSize = isDesktop ? '' : '1200px auto';
-        this.style.backgroundPosition = 'center 50%';
+        if(isDesktop){
+          // this.style.backgroundSize = isDesktop ? this.style.backgroundSize : '80% 80%';
+          this.style.backgroundPosition = 'center center';
+        }
         if(isMobile){
-          this.style.backgroundPosition = 'center';
+          this.style.backgroundsize = '50% 100%';
+          this.style.backgroundPosition = 'top center';
+          this.style.width = '375px';
         }
         return {isDesktop: isDesktop, isMobile: isMobile};
       },
       _nextPage: function(e){
         console.log(this.route)
         var url = ('/'+this.routes[(this.routes.indexOf(this.route) + 1) % 3]).replace('home','');
+        // this.$[this.route].scrollIntoView();
+        switch(this.route){
+          case 'home': this.$.home.scrollIntoView({block: "start", behavior: "smooth"}); break;
+          case 'event': this.$.event.scrollIntoView({block: "start", behavior: "smooth"}); break;
+          case 'about': this.$.about.scrollIntoView({block: "start", behavior: "smooth"}); break;
+        }
         page(url);
-        this.$[this.route].scrollIntoView();
-        // this.$.pages.selectNext();
       },
       _prevPage: function(e){
         console.log(this.$[this.route])
@@ -110,13 +119,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           case 'event': this.$.event.scrollIntoView({block: "start", behavior: "smooth"}); break;
           case 'about': this.$.about.scrollIntoView({block: "start", behavior: "smooth"}); break;
         }
-        // var page = this.routes[(this.routes.indexOf(this.route) + 3) % 4];
-        // var page = this.routes[(this.routes.indexOf(this.route) + 3) % 4];
         var url = ('/'+this.routes[(this.routes.indexOf(this.route) + 2) % 3]).replace('home','');
         page(url);
-        this.$[this.route].scrollIntoView({block: "start", behavior: "smooth"});
-        // this.$.pages.selectPrevious();
-      }
+      },
+      _scrollToPage: function(e, pageName){
+        switch(pageName){
+          case 'home':this.$.home.scrollIntoView({block: "start", behavior: "smooth"}); break;
+          case 'event': this.$.event.scrollIntoView({block: "start", behavior: "smooth"}); break;
+          case 'about': this.$.about.scrollIntoView({block: "start", behavior: "smooth"}); break;
+        }
+      },
+
     });
   })();
   </script>

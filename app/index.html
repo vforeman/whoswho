@@ -64,8 +64,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <iron-media-query query="(min-width: 481px)" query-matches="{{isDesktop}}"></iron-media-query>
 
         <!-- Main Content -->
-        <div class="content">
-          <whoswho-app route='{{route}}' is-mobile='{{isMobile}}' is-desktop='{{isDesktop}}' exit-animation='{{exitAnimation}}' entry-animation='{{entryAnimation}}'></whoswho-app>
+        <div class="content layout vertical">
+          <whoswho-app class='self-center' route='{{route}}' is-mobile='{{isMobile}}' is-desktop='{{isDesktop}}' exit-animation='{{exitAnimation}}' entry-animation='{{entryAnimation}}'></whoswho-app>
         </div>
 
 

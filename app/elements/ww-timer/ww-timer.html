@@ -21,33 +21,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .label{
         font-family: 'Helvetica';
         font-weight:lighter;
-        font-size: 2em;
+        font-size: 1.5em;
       }
       .count{
-        color: var(--ww-red);
+        color: var(--ww-off-white);
       }
       .quantum{
+        padding-top: 64px;
         margin: 0px 16px;
       }
     </style>
     <div class='layout vertical quantum'>
-      <div class='self-center count flex'>~</div>
-    </div>
-    <div class='layout vertical quantum'>
       <div class='self-center count '>{{days}}</div>
-      <div class='self-center label flex'>days</div>
+      <div class='self-center label '>DAYS</div>
     </div>
     <div class='layout vertical quantum'>
       <div class='self-center count '>{{hours}}</div>
-      <div class='self-center label flex'>hours</div>
+      <div class='self-center label '>HOURS</div>
     </div>
     <div class='layout vertical quantum'>
       <div class='self-center count '>{{minutes}}</div>
-      <div class='self-center label flex'>minutes</div>
+      <div class='self-center label '>MINUTES</div>
     </div>
     <div class='layout vertical quantum'>
       <div class='self-center count '>{{seconds}}</div>
-      <div class='self-center label flex'>seconds</div>
+      <div class='self-center label '>SECONDS</div>
     </div>
   </template>
   <script>

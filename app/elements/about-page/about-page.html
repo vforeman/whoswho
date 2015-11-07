@@ -18,13 +18,77 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
         padding: 144px 144px;
-        @apply(--layout-horizontal)
+        padding-bottom: 77px;
+        @apply(--layout-horizontal);
         height: calc(2896px/3);
+        height: -webkit-calc(2896px/3);
       }
-
+      whoswho-toolbar{
+        margin-bottom: 32px;
+        max-width: 500px;
+      }
+      #detail{
+        color:var(--ww-off-white);
+        font-family:'geo-sans-light';
+        font-weight: lighter;
+        font-size: 1.3em;
+        width: 500px;
+        background: rgba(53,0,1,.8);
+        padding: 32px 32px;
+      }
+      .descript{
+        margin-bottom: 16px;
+      }
+      #quote{
+        color: var(--ww-off-white);
+        font-family:'geo-sans-light-italic';
+        font-weight: lighter;
+        font-size: 1.5em;
+        width: 650px;
+        margin: 32px 32px;
+        padding: 32px 32px;
+        border-left-style: solid;
+        border-left-color: #c5b358;
+        border-left-width: 6px;;
+      }
+      #host, #hostmeta{
+        font-family: 'geo-sans-light';
+        margin: 4px 4px;
+      }
+      #hostmeta{
+        color: #c5b358;
+        font-size: .7em;
+      }
+      #host{
+        color: var(--ww-off-white);
+      }
     </style>
-    <div class='flex self-center'> Hello from <span>{{elementName}}</span></div>
-    <whoswho-toolbar exclude='{{dataRoute}}'></whoswho-toolbar>
+    <div class='flex layout vertical'>
+      <div id='detail' class=' layout vertical'>
+        <div class='descript'>
+          The purpose of this event is to create an annual holiday classic to connect prominent young professionals in the Atlanta area and to celebrate the holiday season. I aim to curate a platform that young leaders may use to network with our future business partners, tastemakers, influencers, and world changers. An atmosphere of excellence will be created by leveraging the influences of affluent youth that currently set the standard for the urban community.
+        </div>
+        <div class='descript'>
+          As a brief overview, this event is a red carpet affair giving attendees a reason to dress fashionably, which enhances the aesthetic value of the evening. The ultimate objective is to showcase a positive and upscale reflection of the urban community, while setting a new standard for urban Atlanta nightlife among this rapidly growing demographic.
+        </div>
+        <div class='descript'>
+          This event will also include a toy drive that guests may contribute to upon entry. The toys will be donated to the nonprofit organization LiftUp Atlanta, which will assist underprivileged youth this holiday season.
+        </div>
+      </div>
+      <div id='quote' class='layout vertical'>
+        "This company is more about impact than anything. Enhancing social experiences for the consumer and using the platform created from that to positively impact kids in lower socio-economic areas. A better life, a better world."
+        <div class='layout horizontal'>
+          <span id='host' class='self-center'>Justin Austin</span>
+          <span id='hostmeta' class='self-center'> - that nigga</span>
+        </div>
+      </div>
+      <!-- <div class='flex'></div> -->
+      <whoswho-toolbar exclude='{{dataRoute}}'></whoswho-toolbar>
+
+    </div>
+    <div class=''>
+
+    </div>
   </template>
   <script>
   (function() {
