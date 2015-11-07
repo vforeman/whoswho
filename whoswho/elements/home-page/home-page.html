@@ -1,0 +1,132 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animatable-behavior.html">
+
+<dom-module id="home-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+        @apply(--layout-vertical);
+        height: calc(2896px/3);
+        height: -webkit-calc(2896px/3);
+        color: var(--ww-off-white);
+      }
+      ww-timer{
+        background: rgba(0,0,0,0.3);
+
+      }
+      #content{
+        height: 100%;
+      }
+      .first{
+        font-weight: lighter;
+        font-family: 'lorem-ipsum';
+        font-size: 72px;
+        color: var(--ww-red);
+      }
+      .last{
+        font-size: 72px;
+        font-family: 'simple-print';
+      }
+      .hosted-by{
+        font-weight: bolder;
+        font-family: 'September-Mornings';
+        font-size: 96px;
+      }
+      #hostedby,#hostfirst,#hostlast{
+          font-family: 'geo-sans-light';
+          font-size: 2em;
+          text-align: center;
+      }
+      #hostedby{
+        margin-top: 32px;
+        font-size: 1.6em;
+      }
+      #hostlast, #hostfirst{
+        /*margin-top:8px;
+        margin-bottom: 64px;*/
+      }
+      #hostfirst{
+        color: #c5b358;
+        font-weight: bolder;
+      }
+    </style>
+      <span class='flex spacer'></span>
+    <div id='content' class='layout horizontal self-center '>
+      <div class='layout vertical'>
+        <div class='layout horizontal flex self-center'>
+        </div>
+        <span id='hostedby' class='self-center'>hosted by</span>
+        <div class='layout horizontal self-center'>
+          <span id='hostfirst' class='self-center'>JUSTIN</span>
+          <span id='hostlast' class='self-center'>AUSTIN</span>
+        </div>
+        <template is='dom-if' if='{{mediaQuery.isMobile}}'>
+          <ww-timer class=' self-center'></ww-timer>
+        </template>
+        <template is='dom-if' if='{{mediaQuery.isDesktop}}'>
+          <ww-timer class='flex self-center'></ww-timer>
+        </template>
+        <whoswho-toolbar class='flex self-center' exclude='{{dataRoute}}'></whoswho-toolbar>
+      </div>
+      <span class='flex'></span>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'home-page',
+      created: function(){
+      },
+      ready: function(){
+        // this.style.backgroundImage = "url('"+this.bgImgUrl+"')";
+        // this.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 53%, rgba(0,0,0,1) 100%),' + "url('"+this.bgImgUrl+"')";
+        // this.style.backgroundRepeat = 'no-repeat';
+      },
+      behaviors: [Polymer.NeonAnimatableBehavior],
+      listeners:{
+        'mousewheel': '_scrollHandler'
+      },
+      properties: {
+        mediaQuery: {type: Object, notify: true, observer: '_mediaQueryChanged'},
+        host: {type: String, value:{first:'justin',last:'austin'}, notify: true},
+        bgImgUrl: {type: String, value:'../../images/whoswhoweb.jpg', notify: true},
+        dataRoute: {type: String, notify: true},
+        elementName: {type: String, value: 'home-page', notify: true}
+      },
+      _mediaQueryChanged: function(mediaQuery){
+        // this.style.backgroundSize = this.mediaQuery.isDesktop ? 'cover' : '1200px auto';
+        // this.style.backgroundPosition = 'top center';
+        // if(this.mediaQuery.isMobile){
+        //   this.style.backgroundPosition = 'center';
+        // }
+      },
+      _formatFirst: function(first){
+        return first.toUpperCase();
+      },
+      _scrollHandler: function(e){
+        console.log('scrolling',e);
+        if(e.wheelDelta > 0){
+          //scroll up
+          this.fire('select-previous-neon-page');
+        } else if(e.wheelDelta < 0){
+          //scroll down
+          this.fire('select-next-neon-page');
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>
