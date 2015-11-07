@@ -71,7 +71,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <span id='hostfirst' class='self-center'>JUSTIN</span>
           <span id='hostlast' class='self-center'>AUSTIN</span>
         </div>
-        <ww-timer class='flex self-center'></ww-timer>
+        <template is='dom-if' if='{{mediaQuery.isMobile}}'>
+          <ww-timer class=' self-center'></ww-timer>
+        </template>
+        <template is='dom-if' if='{{mediaQuery.isDesktop}}'>
+          <ww-timer class='flex self-center'></ww-timer>
+        </template>
         <whoswho-toolbar class='flex self-center' exclude='{{dataRoute}}'></whoswho-toolbar>
       </div>
       <span class='flex'></span>
